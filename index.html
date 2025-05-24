@@ -1,0 +1,59 @@
+<button onclick = "alert(text2Binary(prompt('enter phrase')))">To Meeps</button>
+<button onclick = "alert(binary2Text(prompt('enter meeps')))">From Meeps</button>
+
+<script>
+  let meepmeep = "meep meep";
+  
+	function text2Binary(text) {
+  	let binary = text.split('').map((char) => char.charCodeAt(0).toString(2));
+    for (i = 0; i < binary.length; i++) {
+    	binary[i] = '0' + binary[i];
+    }
+    let string = "";
+    for (i = 0; i < binary.length; i++) {
+      string += ' ';
+      for (j = 0; j < 4; j++) {
+      	if (binary[i][j] == '1') {
+        	string += meepmeep[j].toUpperCase(); 
+        } else {
+          string += meepmeep[j]; 
+	      }
+      }
+      
+      string += ' ';
+    
+    	for (j = 4; j < 8; j++) {
+      	if (binary[i][j] == '1') {
+        	string += meepmeep[j + 1].toUpperCase(); 
+        } else {
+          string += meepmeep[j + 1]; 
+	      }
+      }
+    }
+    return string.slice(1);
+	}
+  
+	function binary2Text(str) {
+    let meeps = str.split(' ');
+    let binary = "";
+    for (i = 0; i < meeps.length; i++) {
+    	for (j = 0; j < meeps[i].length; j++) {
+      	 if (meeps[i][j].toUpperCase() == meeps[i][j]) {
+           binary += '1';
+         } else {
+						binary += '0';
+         }
+      }
+      if (i % 2 != 0 && i != meeps.length - 1) {
+      	binary += ' ';  
+      }
+    }
+    
+		var binString = '';
+
+		binary.split(' ').map(function(bin) {
+    	binString += String.fromCharCode(parseInt(bin, 2));
+		});
+		return binString.replaceAll('@', ' ');
+	}
+</script>
